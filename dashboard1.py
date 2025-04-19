@@ -52,7 +52,7 @@ def obtener_datos_tesoro(periodos):
 # --------------------------------------
 
 st.set_page_config(layout="wide")
-st.title("📈 Daily Treasury Yield Curve Dashboard")
+st.title("Daily Treasury Par Yield Curve Dashboard")
 años = st.multiselect("Selecciona año(s):", list(range(2020, 2026)), default=[2024])
 df = obtener_datos_tesoro(años)
 
@@ -74,7 +74,7 @@ if not df.empty:
     # -------------------
     # OVERLAY DE CURVAS
     # -------------------
-    st.subheader("📊 Comparación de curvas por fecha")
+    st.subheader("Comparación de curvas por fecha")
     fig_comparacion = px.line()
 
     for fecha in fechas_seleccionadas:
@@ -90,7 +90,7 @@ if not df.empty:
     # -------------------
     # ANIMACIÓN
     # -------------------
-    st.subheader("📽️ Animación de la curva de rendimiento")
+    st.subheader("Rendimiento de los bonos del Tesoro a la par")
     df_anim = df.copy()
     df_anim = df_anim.melt(id_vars=["Date"], value_vars=maturities, var_name="Maturity", value_name="Yield")
 
@@ -109,7 +109,7 @@ if not df.empty:
         if "Spread 10Y - 2Y" in df.columns:
             df[['Date', 'Spread 10Y - 2Y']].to_excel(writer, index=False, sheet_name='Spread')
 
-    st.download_button(label="⬇️ Descargar Excel", data=output.getvalue(), file_name="treasury_yield_curve.xlsx")
+    st.download_button(label="Descargar Excel", data=output.getvalue(), file_name="treasury_par_yield_curve.xlsx")
 
 else:
     st.warning("No se encontraron datos para los años seleccionados.")
