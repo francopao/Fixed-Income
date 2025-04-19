@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Apr 19 00:49:37 2025
-
-@author: usuario
-"""
+"Franco Olivares - Fixed Income analysis"
 
 import streamlit as st
 import pandas as pd
@@ -52,6 +47,9 @@ def obtener_datos_tesoro(periodos):
 # --------------------------------------
 
 st.set_page_config(layout="wide")
+# Logo de la empresa
+st.image("https://media.licdn.com/dms/image/v2/C4E0BAQHGRK4sbvBk8w/company-logo_200_200/company-logo_200_200/0/1664209061611/decision_capital_eirl_logo?e=2147483647&v=beta&t=dS9RqOZoCN82k_Jqg6JF9Fm7MAQlNUSfIrEuQdLg_qQ", 
+         width=200)
 st.title("Daily Treasury Par Yield Curve Dashboard")
 años = st.multiselect("Selecciona año(s):", list(range(2020, 2026)), default=[2024])
 df = obtener_datos_tesoro(años)
@@ -102,14 +100,14 @@ if not df.empty:
     # -------------------
     # DESCARGA DE DATOS
     # -------------------
-    st.subheader("📥 Exportar datos")
+    st.subheader("Exportar datos")
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
         df.to_excel(writer, index=False, sheet_name='Yield Curve')
         if "Spread 10Y - 2Y" in df.columns:
             df[['Date', 'Spread 10Y - 2Y']].to_excel(writer, index=False, sheet_name='Spread')
 
-    st.download_button(label="Descargar Excel", data=output.getvalue(), file_name="treasury_par_yield_curve.xlsx")
+    st.download_button(label="⬇️ Descargar Excel", data=output.getvalue(), file_name="treasury_yield_curve.xlsx")
 
 else:
     st.warning("No se encontraron datos para los años seleccionados.")
