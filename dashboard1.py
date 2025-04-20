@@ -51,7 +51,7 @@ st.set_page_config(layout="wide")
 st.image("https://media.licdn.com/dms/image/v2/C4E0BAQHGRK4sbvBk8w/company-logo_200_200/company-logo_200_200/0/1664209061611/decision_capital_eirl_logo?e=2147483647&v=beta&t=dS9RqOZoCN82k_Jqg6JF9Fm7MAQlNUSfIrEuQdLg_qQ", 
          width=200)
 st.title("Daily Treasury Par Yield Curve Dashboard")
-años = st.multiselect("Selecciona año(s):", list(range(2020, 2026)), default=[2024])
+años = st.multiselect("Selecciona año(s):", list(range(2008, 2026)), default=[2025])
 df = obtener_datos_tesoro(años)
 
 if not df.empty:
